@@ -3,9 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DatabaseCreate = void 0;
 const DataBaseConec_1 = require("./DataBaseConec");
 class DatabaseCreate {
-    DBconnect = new DataBaseConec_1.DataBaseConec().DBconnect;
+    DataBaseConec = new DataBaseConec_1.DataBaseConec();
+    connect = this.DataBaseConec.conector();
+    DBconnect = this.DataBaseConec.DBconnect;
     createDB = () => {
         if (typeof this.DBconnect === "undefined")
+            return;
+        if (!this.connect)
             return;
         this.DBconnect.connect((err) => {
             if (err)

@@ -3,8 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DatabaseCreateTable = void 0;
 const DataBaseConec_1 = require("./DataBaseConec");
 class DatabaseCreateTable {
-    DBconnect = new DataBaseConec_1.DataBaseConec().DBconnect;
+    DataBaseConec = new DataBaseConec_1.DataBaseConec();
+    connect = this.DataBaseConec.conector();
+    DBconnect = this.DataBaseConec.DBconnect;
     createTable = (Table) => {
+        console.log(this.connect);
+        if (!this.connect)
+            return;
         if (typeof this.DBconnect === "undefined")
             return;
         this.DBconnect.connect((err) => {
@@ -32,6 +37,7 @@ class DatabaseCreateTable {
                         if (result.message === "")
                             result.message = "sucess";
                         console.log("Table Created !CODE:[" + result.message + "]");
+                        process.exit(0);
                     }
                 });
             }
