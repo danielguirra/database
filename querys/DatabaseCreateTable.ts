@@ -14,14 +14,14 @@ export class DatabaseCreateTable {
       if (err) throw err;
       else {
         let c = 1;
-        let sqlQueryBase = `CREATE TABLE ${Table.name} (id INT AUTO_INCREMENT PRIMARY KEY, ${Table.columns[0].name} ${Table.columns[0].type}(${Table.columns[0].length}))`;
+        let sqlQueryBase = `CREATE TABLE ${Table.name} (id INT AUTO_INCREMENT PRIMARY KEY, ${Table.columns[0].name} ${Table.columns[0].type})`;
         let sqlquery: string = "";
         if (Table.columns.length > 1) {
           while (Table.columns.length >= c) {
             if (c === Table.columns.length - 1)
               sqlquery = sqlQueryBase.replace(
                 "))",
-                `), ${Table.columns[c].name} ${Table.columns[c].type}(${Table.columns[c].length}))`
+                `), ${Table.columns[c].name} ${Table.columns[c].type})`
               );
             c++;
           }

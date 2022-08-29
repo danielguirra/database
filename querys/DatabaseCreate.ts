@@ -7,18 +7,22 @@ export class DatabaseCreate {
   createDB = () => {
     if (typeof this.DBconnect === "undefined") return;
     if (!this.connect) return;
-    this.DBconnect.connect((err: any) => {
-      if (err) console.log("DATABASE : " + err.message);
-      else {
-        if (typeof this.DBconnect === "undefined") return;
-        this.DBconnect.query(
-          "CREATE DATABASE msec",
-          (err: any, result: any) => {
-            if (err) throw err;
-            else console.log("Database Created !CODE:[" + result + "]");
-          }
-        );
-      }
-    });
+    try {
+      this.DBconnect.connect((err: any) => {
+        if (err) console.log("DATABASE : " + err.message);
+        else {
+          if (typeof this.DBconnect === "undefined") return;
+          this.DBconnect.query(
+            "CREATE DATABASE msec",
+            (err: any, result: any) => {
+              if (err) throw err;
+              else console.log("Database Created !CODE:[" + result + "]");
+            }
+          );
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }

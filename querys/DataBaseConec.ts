@@ -10,14 +10,19 @@ export class DataBaseConec {
   DBconnect: Connection | undefined;
 
   conector = () => {
-    this.DBconnect = createConnection({
-      host: host,
-      user: user,
-      password: password,
-      database: "msec",
-    });
+    try {
+      this.DBconnect = createConnection({
+        host: host,
+        user: user,
+        password: password,
+        database: "msec",
+      });
 
-    return true;
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   };
 
   test = () => {
